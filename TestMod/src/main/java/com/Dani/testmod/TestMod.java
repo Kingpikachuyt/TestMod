@@ -1,5 +1,7 @@
 package com.Dani.testmod;
 
+import com.Dani.testmod.block.Modblocks;
+import com.Dani.testmod.item.ModCreativeModeTabs;
 import com.Dani.testmod.item.Moditems;
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.CreativeModeTab;
@@ -34,7 +36,10 @@ public class TestMod
 
         MinecraftForge.EVENT_BUS.register(this);
 
+        ModCreativeModeTabs.register(modEventBus);
+
         Moditems.register(modEventBus);
+        Modblocks.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -55,6 +60,12 @@ public class TestMod
         {
             event.accept(Moditems.ALEXANDRITE);
             event.accept(Moditems.RAW_ALEXANDRITE);
+        }
+
+        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
+        {
+            event.accept(Modblocks.ALEXANDRITE_BLOCK);
+            event.accept(Modblocks.RAW_ALEXANDRITE_BLOCK);
         }
     }
 
